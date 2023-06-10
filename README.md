@@ -20,7 +20,7 @@ This repository is a replica package of the paper "Self-Admitted Technical Debts
 | Dataset-11-Commits | Commit Messages |[data](https://github.com/yikun-li/satd-different-sources-data)  |
 
 ### code
-The code implemented by the MT-BERT-SATD model can be found in the code file
+The code implemented by the MT-BERT-SATD model can be found in the code file. More details will be refined later.
 
 ### predict
 1. Download the well-trained model [link](https://huggingface.co/aavvvv/mt-bert-satd/tree/main)
