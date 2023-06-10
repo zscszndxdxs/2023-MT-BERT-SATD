@@ -7,7 +7,7 @@ This repository is a replica package of the paper "Self-Admitted Technical Debts
 |Dataset|Sample Source|Link|
 |-|-|-| //识别表头
 |Dataset-01-Comments-Dockerfile|Code comments/dockerfile|[link](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)|
-| Syntax      | Description | Test Text     |
+| Dataset     | Sample Source | Link     |
 | :---        |    :----:   |          ---: |
 | Header      | Title       | Here's this   |
 | Paragraph   | Text        | And more      |
