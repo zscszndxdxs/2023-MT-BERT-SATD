@@ -21,3 +21,5 @@ This repository is a replica package of the paper "Self-Admitted Technical Debts
 
 ### code
 The code implemented by the MT-BERT-SATD model can be found in the code file
+
+### predict
