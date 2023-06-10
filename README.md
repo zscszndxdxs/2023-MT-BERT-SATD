@@ -7,5 +7,14 @@ This repository is a replica package of the paper "Self-Admitted Technical Debts
 
 | Dataset     | Sample Source | Link     |
 | :---        |    :----:   |          ---: |
-| Dataset-01-Comments-Dockerfile | Code comments/dockerfile |[link](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
-| Paragraph   | Text        | And more      |
+| Dataset-01-Comments-Dockerfile | Code comments/dockerfile |[data](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
+| Dataset-02-Comments-Python | Code comments/python |[data](https://github.com/DavidMOBrien/23Shades)  |
+| Dataset-03-Comments-Dockerfile | Code comments/dockerfile |[data](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
+| Dataset-04-Comments-Dockerfile | Code comments/dockerfile |[data](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
+| Dataset-05-Comments-Dockerfile | Code comments/dockerfile |[data](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
+| Dataset-06-Comments-Dockerfile | Code comments/dockerfile |[data](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
+| Dataset-07-Comments-Dockerfile | Code comments/dockerfile |[data](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
+| Dataset-08-Comments-Dockerfile | Code comments/dockerfile |[data](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
+| Dataset-09-Comments-Dockerfile | Code comments/dockerfile |[data](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
+| Dataset-10-Comments-Dockerfile | Code comments/dockerfile |[data](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
+| Dataset-11-Comments-Dockerfile | Code comments/dockerfile |[data](https://docs.google.com/spreadsheets/d/1ZCkdLxQjJyZpp88NtXYcSCNko8HX-2-uUzX217pf67s/edit#gid=0)  |
