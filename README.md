@@ -29,7 +29,7 @@ The code implemented by the MT-BERT-SATD model can be found in the code file
 ```
 python predict.py --task {id 1-5 } --data_dir {file_name} --output_dir {out_path}.
 ```
-#### illustrate: \<br> 
+#### illustrate:
 The optional range of {task} is 1-5, where they represent unclassified files from 1- "Issue Trackers", 2- "Pull Requests", 3- "Commit Messages", 4- "Code Comments", and 5- "Others".\<br> 
 
 
