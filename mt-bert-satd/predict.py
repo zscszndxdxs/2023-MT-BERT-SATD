@@ -16,7 +16,7 @@ import torch
 from torch.utils.data import TensorDataset, DataLoader
 from torch.utils.data.sampler import RandomSampler, SequentialSampler
 from torch.utils.data.distributed import DistributedSampler
-
+import process
 import tokenization
 from modeling_multitask_predict import BertConfig, BertForSequenceClassification
 from optimization import BERTAdam
@@ -25,8 +25,8 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(name)s -   %(message
                     datefmt='%m/%d/%Y %H:%M:%S',
                     level=logging.INFO)
 logger = logging.getLogger(__name__)
-os.environ["CUDA_VISIBLE_DEVICES"] = '0,1,2'
-torch.cuda.set_device(2)
+os.environ["CUDA_VISIBLE_DEVICES"] = '0,1,2,3'
+torch.cuda.set_device(0)
 
 
 class InputExample(object):
@@ -89,7 +89,7 @@ class AllProcessor(DataProcessor):
 
     def get_predict_examples(self, data_dir, task):
         predict_data = pd.read_csv(
-            os.path.join('data/' + data_dir + '.csv'), header=None, sep=",").values
+            os.path.join("unclassified_files/" +data_dir + '.csv'), header=None, sep=",").values
         predict_data = np.delete(predict_data, 0, 0)
         print("=====================")
         print(predict_data)
@@ -106,8 +106,13 @@ class AllProcessor(DataProcessor):
         for (i, line) in enumerate(predict_data):
             # if i>147:break
             guid = "%s-%s" % (set_type, i)
-
-            text_a = tokenization.convert_to_unicode(str(line[1]))
+            
+            text = str(line[0])
+            text = process.getdata(text)
+            if i <5:
+                print(text)
+            
+            text_a = tokenization.convert_to_unicode(text)
 
             examples.append(InputExample(guid=guid, text_a=text_a, text_b=None, label=None, dataset_label=task))
         return examples
@@ -245,16 +250,16 @@ def main():
                         default=None,
                         type=str,
                         required=True,
-                        help="The input data dir. Should contain the .tsv files (or other data files) for the task.",
+                        help="The task you want to predict, 1-5",
                         )
 
     parser.add_argument(
-        "--data_dir",
-        default=None,
-        type=str,
-        required=True,
-        help="The input data dir. Should contain the .tsv files (or other data files) for the task.",
-    )
+			        "--data_dir",
+			        default=None,
+			        type=str,
+			        required=True,
+			        help="The input data dir. Should contain the .csv files (or other data files) for the task.",
+			    )
 
     parser.add_argument("--batch_size",
                         default=8,
@@ -262,10 +267,10 @@ def main():
                         help="Total batch size for eval.")
 
     parser.add_argument("--output_dir",
-                        default="out_put",
+                        default="predict_results",
                         type=str,
                         required=True,
-                        help="Total batch size for eval.")
+                        help="output files.")
     args = parser.parse_args()
     processor = AllProcessor()
     label_list = processor.get_labels()
@@ -282,12 +287,12 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
 
     tokenizer = tokenization.FullTokenizer(
-        vocab_file="SATD_identification_model/vocab.txt", do_lower_case=True)
-    bert_config = BertConfig.from_json_file("SATD_identification_model/config.json")
+        vocab_file="well_trained_model/vocab.txt", do_lower_case=True)
+    bert_config = BertConfig.from_json_file("well_trained_model/config.json")
 
     model = BertForSequenceClassification(bert_config, len(label_list))
 
-    checkpoint = torch.load('SATD_identification_model/pytorch_model.bin')
+    checkpoint = torch.load('well_trained_model/pytorch_model.bin')
     model.bert.load_state_dict(checkpoint['bert'])
     model.classifier_1.load_state_dict(checkpoint['classifier_1'])
     model.classifier_2.load_state_dict(checkpoint['classifier_2'])
@@ -308,17 +313,16 @@ def main():
     predict_dataloader = DataLoader(predict_data, batch_size=args.batch_size, shuffle=False)
 
     model.eval()
-
+    predict_list = []
+    
     with open(os.path.join(args.output_dir, "results_" + args.data_dir + str(args.task) + ".txt"), "w") as f:
         for input_ids, input_mask, segment_ids, label_ids, dataset_label_id in predict_dataloader:
             input_ids = input_ids.to(device)
             input_mask = input_mask.to(device)
             segment_ids = segment_ids.to(device)
             label_ids = None
-            print("==============dataset_label==============id")
-            print(dataset_label_id)
-            print(dataset_label_id[0].item())
-
+            
+           
             with torch.no_grad():
 
                 if str(args.task) == '1' or str(args.task) == '2' or str(args.task) == '3' or str(args.task) == '4':
@@ -327,6 +331,7 @@ def main():
                     outputs = np.argmax(logits, axis=1)
                     for output in outputs:
                         f.write(str(output) + "\n")
+                    predict_list.extend(outputs)
                 if str(args.task) == '5':
                     logits1, logits2, logits3, logits4 = model(input_ids, segment_ids, input_mask, label_ids,
                                                                dataset_label_id, task=args.task)
@@ -344,26 +349,28 @@ def main():
 
                     outputs = []
 
-                    # 接下来采用投票技术计算正在的outputs
+                    # Next, use voting technology to calculate the current outputs
                     for i in range(len(outputs1)):
                         value = [outputs1[i], outputs2[i], outputs3[i], outputs4[i]]
                         count_of_1 = value.count(1)
-
+                        
                         if count_of_1 >= 2:
                             outputs.append(1)
                         else:
                             outputs.append(0)
-
+                    predict_list.extend(outputs)
+                    print(outputs)
                     for output in outputs:
                         f.write(str(output) + "\n")
-                    print("start======")
-                    print(outputs1)
-                    print(outputs2)
-                    print(outputs3)
-                    print(outputs4)
-                    print("final==")
-                    print(outputs)
-                    print("end")
+                    
+
+    import pandas as pd
+
+    data = pd.read_csv('unclassified_files/'+args.data_dir+'.csv')
+    
+    data['predict'] = predict_list
+    data.to_csv( args.output_dir + '/predict_'+args.data_dir+'.csv', index=False)
+
 
 
 if __name__ == "__main__":
