@@ -24,3 +24,4 @@ The code implemented by the MT-BERT-SATD model can be found in the code file
 
 ### predict
 Download the well-trained model [link](https://huggingface.co/aavvvv/mt-bert-satd/tree/main)
+
