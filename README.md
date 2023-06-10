@@ -25,4 +25,13 @@ The code implemented by the MT-BERT-SATD model can be found in the code file
 ### predict
 1. Download the well-trained model [link](https://huggingface.co/aavvvv/mt-bert-satd/tree/main)
 2. Put the downloaded three files "pytorch_model.bin", "vocab.txt" and "config.json" in the well_trained_model folder
-3. 
+3. Place the unclassified CSV file, such as "4_unclassified.csv", in the unclassified_files directory, and execute the following code to perform the identification of Self-Admitted Technical Debt (SATD).
+```
+python predict.py --task {id 1-5 } --data_dir {file_name} --output_dir {out_path}.
+```
+illustrate: The optional range of {task} is 1-5, where they represent unclassified files from 1- "Issue Trackers", 2- "Pull Requests", 3- "Commit Messages", 4- "Code Comments", and 5- "Others".\<br> 
+For example, "4_unclassified" in the example represents data in code comments, so the detailed running code is:
+```
+python predict.py --task 4 --data_dir 4_unclassified --output_dir predict_files.
+```
+
