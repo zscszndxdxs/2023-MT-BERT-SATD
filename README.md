@@ -23,5 +23,6 @@ This repository is a replica package of the paper "Self-Admitted Technical Debts
 The code implemented by the MT-BERT-SATD model can be found in the code file
 
 ### predict
-Download the well-trained model [link](https://huggingface.co/aavvvv/mt-bert-satd/tree/main)
-
+1. Download the well-trained model [link](https://huggingface.co/aavvvv/mt-bert-satd/tree/main)
+2. Put the downloaded three files "pytorch_model.bin", "vocab.txt" and "config.json" in the well_trained_model folder
+3. 
