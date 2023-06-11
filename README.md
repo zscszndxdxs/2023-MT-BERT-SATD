@@ -20,7 +20,7 @@ This repository is a replica package of the paper "Self-Admitted Technical Debts
 | Dataset-11-Commits | Commit Messages |[data](https://github.com/yikun-li/satd-different-sources-data)  |
 
 ### code
-The code implemented by the MT-BERT-SATD model can be found in the code file. More details will be refined later.
+The code implemented by the MT-BERT-SATD model can be found in the code file.
 There are four files in the training script, namely "modeling_multitask. py", "optimization. py", "tokenization. py", and "run_mt_bert_satd. py", where the training entry is run_mt_bert_satd. py. Training requires executing the following command:
 ```
 python run_mt_bert_satd.py
@@ -35,6 +35,7 @@ python run_mt_bert_satd.py
 --seed {train_seed}
 --patience {early_stopping_number}
 ```
+#### tips: 
 ### predict
 1. Download the well-trained model [link](https://huggingface.co/aavvvv/mt-bert-satd/tree/main)
 2. Put the downloaded three files "pytorch_model.bin", "vocab.txt" and "config.json" in the well_trained_model folder
