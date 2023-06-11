@@ -35,7 +35,8 @@ python run_mt_bert_satd.py
 --seed {train_seed}
 --patience {early_stopping_number}
 ```
-#### tips: 
+#### tips: Before conducting model training, download the bert_base pre-training file and place it in the bert_base_uncased folder. 
+Download link for pre_trained models: [links](https://huggingface.co/bert-base-uncased)
 ### predict
 1. Download the well-trained model [link](https://huggingface.co/aavvvv/mt-bert-satd/tree/main)
 2. Put the downloaded three files "pytorch_model.bin", "vocab.txt" and "config.json" in the well_trained_model folder
