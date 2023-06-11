@@ -21,7 +21,20 @@ This repository is a replica package of the paper "Self-Admitted Technical Debts
 
 ### code
 The code implemented by the MT-BERT-SATD model can be found in the code file. More details will be refined later.
-
+There are four files in the training script, namely "modeling_multitask. py", "optimization. py", "tokenization. py", and "run_mt_bert_satd. py", where the training entry is run_mt_bert_satd. py. Training requires executing the following command:
+```
+python run_mt_bert_satd.py
+--data_dir {data_path}
+--output_dir {model_checkpoints_save_path}
+--do_train {train}
+--do_eval {eval}
+--train_batch_size {train_batch_size}
+--eval_batch_size {eval_batch_size}
+--learning_rate {learning_rate}
+--num_train_epochs {epoch}
+--seed {train_seed}
+--patience {early_stopping_number}
+```
 ### predict
 1. Download the well-trained model [link](https://huggingface.co/aavvvv/mt-bert-satd/tree/main)
 2. Put the downloaded three files "pytorch_model.bin", "vocab.txt" and "config.json" in the well_trained_model folder
